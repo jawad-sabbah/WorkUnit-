@@ -15,17 +15,23 @@ exports.handleLogin = async(req, res) => {
    
     
     if (!findUser) {
-      res.send('this user not exist please Register');
+     return res.render('./auth/login',{
+      error:'User not Exist'
+     });
     }
     
       const hashedPassword=findUser.password;
       const PasswordIsMatch= await bcrypt.compare(password,hashedPassword);
 
        if (PasswordIsMatch) {
-          res.send('login succsefully!')
+        return res.render('layout',{
+          user:'Admin'
+      })
        }
        else{
-        res.send('incorrect Password!')
+        res.render('./auth/login',{
+          error:'Inccorect Password '
+        })
        }
      
 
@@ -44,10 +50,20 @@ exports.handleRegister = async(req, res) => {
 
   try {
     
-    const hashPassword=await bcrypt.hash(password,10)
-    const newUser=await userModel.createUser(username,email,hashPassword);
+    const UserNameExist=await userModel.findByUserName(username);
+   
+       if (UserNameExist) {
+         res.render('./auth/register',{
+          error:'username already  taken'
+         })
+       }
+
+      const hashPassword=await bcrypt.hash(password,10);
+      await userModel.createUser(username,email,hashPassword);
     
-    res.redirect('/');
+    res.render('layout',{
+      user:'Admin'
+    })
   } catch (error) {
     console.log(error);
   }
