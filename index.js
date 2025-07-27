@@ -1,10 +1,17 @@
 const express=require('express');
-
+const session = require('express-session');
+const userModel = require('./models/userModel');
 
 
 const app=express();
 const port=3000;
 
+app.use(session({
+  secret: 'your-secret-key', // change this to something strong in production
+  resave: false,
+  saveUninitialized: false,
+  cookie: { secure: false } // set to true only if using HTTPS
+}));
 
 
 
@@ -23,6 +30,16 @@ app.use('/auth', authRoutes);
 //app.use('/projects', projectRoutes);
 //app.use('/admin', adminRoutes);
  
+
+//For MiddleWare
+const { requireAuth } = require('./middlewares/authMiddleware');
+
+
+// Protected route
+app.get('/layout', requireAuth, async (req, res) => {
+  const user = await userModel.findById(req.session.userId);
+  res.render('layout', { user });
+});
 
 
 app.get("/",(req,res)=>{

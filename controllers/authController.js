@@ -24,9 +24,12 @@ exports.handleLogin = async(req, res) => {
       const PasswordIsMatch= await bcrypt.compare(password,hashedPassword);
 
        if (PasswordIsMatch) {
-        return res.render('layout',{
-          user:'Admin'
-      })
+ 
+      //Store user ID in session after login   
+      req.session.userId = findUser.id;
+      
+       return res.redirect('/layout'); 
+       
        }
        else{
         res.render('./auth/login',{
@@ -51,10 +54,11 @@ exports.handleRegister = async(req, res) => {
   try {
     
     const UserNameExist=await userModel.findByUserName(username);
-   
+     //UserNameExist know is Object
+     
        if (UserNameExist) {
          res.render('./auth/register',{
-          error:'username already  taken'
+          error:'username already taken'
          })
        }
 
@@ -62,7 +66,7 @@ exports.handleRegister = async(req, res) => {
       await userModel.createUser(username,email,hashPassword);
     
     res.render('layout',{
-      user:'Admin'
+      user:UserNameExist
     })
   } catch (error) {
     console.log(error);
