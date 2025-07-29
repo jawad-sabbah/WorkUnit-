@@ -1,8 +1,10 @@
 //middleware handles access control.
 
 exports.requireAuth = (req, res, next) => {
-  if (!req.session.userId) {
+
+    console.log('Session user in middleware:', req.session.user);
+  if (!req.session.user) {
     return res.redirect('./auth/login'); // redirect if not logged in
   }
-  next(); // allow access if logged in
+       next();
 };

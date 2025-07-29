@@ -26,9 +26,15 @@ exports.handleLogin = async(req, res) => {
        if (PasswordIsMatch) {
  
       //Store user ID in session after login   
-      req.session.userId = findUser.id;
-      
-       return res.redirect('/layout'); 
+      req.session.user={
+        id:findUser.id,
+        username:findUser.username,
+        role:findUser.role
+      }
+     
+console.log('Session user after login:', req.session.user);
+     
+       return res.redirect('/layout') 
        
        }
        else{
