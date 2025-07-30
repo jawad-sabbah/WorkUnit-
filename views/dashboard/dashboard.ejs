@@ -1,0 +1,96 @@
+<%- include('../partials/header') %>
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  <h1 class="text-4xl font-bold text-gray-800 mb-8"> Admin Dashboard</h1>
+
+  <!-- Summary Cards -->
+
+
+  
+  <!-- User Search Form -->
+<form action="/admin/dashboard" method="GET" class="mb-6 flex items-center space-x-3 max-w-md">
+  <input
+    type="text"
+    name="search"
+    value="<%= typeof search !== 'undefined' ? search : '' %>"
+    placeholder="Search users by username..."
+    class="flex-grow px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+  />
+  <button
+    type="submit"
+    class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+  >
+    Search
+  </button>
+</form>
+
+  <!-- Users Table -->
+  <section class="bg-white p-6 rounded-2xl shadow mb-10">
+    <h2 class="text-2xl font-semibold text-gray-800 mb-4">👥 Manage Users</h2>
+    <div class="overflow-x-auto">
+      <table class="w-full text-left border-collapse">
+        <thead class="bg-gray-100 text-gray-600 text-sm uppercase">
+          <tr>
+            <th class="px-4 py-3">ID</th>
+            <th class="px-4 py-3">Username</th>
+            <th class="px-4 py-3">Email</th>
+            <th class="px-4 py-3">Role</th>
+            <th class="px-4 py-3 text-center">Actions</th>
+          </tr>
+        </thead>
+        <tbody class="text-sm text-gray-700">
+          <% users.forEach(user => { %>
+            <tr class="border-t hover:bg-gray-50 transition">
+              <td class="px-4 py-2"><%= user.id %></td>
+              <td class="px-4 py-2"><%= user.username %></td>
+              <td class="px-4 py-2"><%= user.email %></td>
+              <td class="px-4 py-2 capitalize"><%= user.role %></td>
+              <td class="px-4 py-2 text-center space-x-2">
+                <a href="/admin/users/<%= user.id %>/edit" class="text-blue-600 hover:underline">Edit</a>
+                <form action="/admin/users/<%= user.id %>?_method=DELETE" method="POST" class="inline">
+                  <button type="submit" class="text-red-600 hover:underline">Delete</button>
+                </form>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Projects Table -->
+  <section class="bg-white p-6 rounded-2xl shadow">
+    <h2 class="text-2xl font-semibold text-gray-800 mb-4">📁 Manage Projects</h2>
+    <div class="overflow-x-auto">
+      <table class="w-full text-left border-collapse">
+        <thead class="bg-gray-100 text-gray-600 text-sm uppercase">
+          <tr>
+            <th class="px-4 py-3">ID</th>
+            <th class="px-4 py-3">Title</th>
+            <th class="px-4 py-3">Owner</th>
+            <th class="px-4 py-3">Created At</th>
+            <th class="px-4 py-3 text-center">Actions</th>
+          </tr>
+        </thead>
+        <tbody class="text-sm text-gray-700">
+          <% projects.forEach(project => { %>
+            <tr class="border-t hover:bg-gray-50 transition">
+              <td class="px-4 py-2"><%= project.id %></td>
+              <td class="px-4 py-2"><%= project.title %></td>
+              <td class="px-4 py-2"><%= project.owner_username %></td>
+              <td class="px-4 py-2"><%= new Date(project.created_at).toLocaleDateString() %></td>
+              <td class="px-4 py-2 text-center space-x-2">
+                <a href="/admin/projects/<%= project.id %>/edit" class="text-blue-600 hover:underline">Edit</a>
+                <form action="/admin/projects/<%= project.id %>?_method=DELETE" method="POST" class="inline">
+                  <button type="submit" class="text-red-600 hover:underline">Delete</button>
+                </form>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</div>
+
+<%- include('../partials/footer') %>

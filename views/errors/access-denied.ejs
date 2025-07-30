@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-gray-50">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Access Denied - 403</title>
+   <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="h-full flex flex-col items-center justify-center bg-gradient-to-r from-red-100 via-red-200 to-red-300 px-4">
+
+  <div class="bg-white shadow-lg rounded-xl max-w-md w-full p-10 text-center">
+    <h1 class="text-7xl font-extrabold text-red-600 mb-6 select-none">403</h1>
+    <h2 class="text-3xl font-semibold text-gray-800 mb-4">Access Denied</h2>
+    <p class="text-gray-600 mb-8 leading-relaxed">
+      Sorry, you don’t have permission to access this page.
+    </p>
+    <a href="/layout" 
+       class="inline-block bg-red-600 hover:bg-red-700 transition text-white font-semibold px-6 py-3 rounded-lg shadow-lg focus:outline-none focus:ring-4 focus:ring-red-300"
+       >
+      Return to Home
+    </a>
+  </div>
+
+  <footer class="mt-12 text-gray-500 text-sm select-none">
+    &copy; <%= new Date().getFullYear() %> YourAppName. All rights reserved.
+  </footer>
+
+</body>
+</html>

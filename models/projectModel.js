@@ -6,3 +6,8 @@ exports.getNumberOfProject=async (id) => {
   return result.rows[0];
 
 }
+
+exports.getAllProject=async()=>{
+  const result=await db.query('select * from projects')
+  return result.rows
+}

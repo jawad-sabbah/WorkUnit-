@@ -18,6 +18,13 @@ exports.findById=async (id) => {
   return result.rows[0];
 }
 
+exports.getAllUsers=async () => {
+  const result=await db.query("select * from users order by id ASC")
+  return result.rows
+}
+
+
+
 exports.updateProfile=async (id,username,email) => {
   
   const result = await db.query(
