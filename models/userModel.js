@@ -17,3 +17,13 @@ exports.findById=async (id) => {
   const result = await db.query('SELECT * FROM users WHERE id = $1', [id]);
   return result.rows[0];
 }
+
+exports.updateProfile=async (id,username,email) => {
+  
+  const result = await db.query(
+    'UPDATE users SET username = $1, email = $2 WHERE id = $3 RETURNING *',
+    [username, email, id]
+  );
+   
+   return result.rows[0];
+}

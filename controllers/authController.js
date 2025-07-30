@@ -31,9 +31,7 @@ exports.handleLogin = async(req, res) => {
         username:findUser.username,
         role:findUser.role
       }
-     
-console.log('Session user after login:', req.session.user);
-     
+ 
        return res.redirect('/layout') 
        
        }

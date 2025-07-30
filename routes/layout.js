@@ -1,12 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const userModel = require('../models/userModel');
+const layoutController=require('../controllers/layoutController')
 const { requireAuth } = require('../middlewares/authMiddleware');
 
-router.get('/', requireAuth, async (req, res) => {
-  const userId = req.session.user.id;
-  const user = await userModel.findById(userId);
-  res.render('layout', { user });
-});
+router.get('/', requireAuth,layoutController.showLayout );
+//this is example of protected route
 
 module.exports = router;

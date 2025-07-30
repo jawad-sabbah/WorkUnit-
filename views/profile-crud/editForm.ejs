@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Profile - <%= user.username %></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+
+  <!-- Back Button -->
+  <div class="max-w-2xl mx-auto mt-6 px-6">
+    <a href="/profile" class="inline-flex items-center text-blue-600 hover:text-blue-800 transition">
+      <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+      </svg>
+      <span>Back to Profile</span>
+    </a>
+  </div>
+
+  <!-- Edit Form -->
+  <div class="max-w-2xl mx-auto mt-4 bg-white rounded-xl shadow-md p-6">
+    <h1 class="text-2xl font-bold text-gray-800 mb-6">✏️ Edit Profile</h1>
+
+    <form action="/profile/edit" method="POST" class="space-y-4">
+      <!-- Username -->
+      <div>
+        <label class="block text-gray-700 font-semibold mb-1">Username</label>
+        <input type="text" name="username" value="<%= user.username %>" required
+               class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300">
+      </div>
+
+      <!-- Email -->
+      <div>
+        <label class="block text-gray-700 font-semibold mb-1">Email</label>
+        <input type="email" name="email" value="<%= user.email %>" required
+               class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300">
+      </div>
+
+     
+
+   
+
+      <!-- Submit Button -->
+      <div class="pt-4">
+        <button type="submit"
+                class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+          💾 Save Changes
+        </button>
+      </div>
+    </form>
+  </div>
+
+</body>
+</html>

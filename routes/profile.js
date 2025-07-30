@@ -5,4 +5,8 @@ const { requireAuth } = require('../middlewares/authMiddleware');
 
 router.get('/', requireAuth, profileController.showProfile);
 
+router.get('/edit',profileController.showEdit);
+
+router.post('/edit',requireAuth,profileController.updateProfile)
+
 module.exports = router;
