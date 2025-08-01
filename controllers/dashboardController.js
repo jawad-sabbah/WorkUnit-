@@ -17,3 +17,97 @@ exports.showDashboard=async (req,res) => {
     console.log(error);
   }
 }
+
+exports.showEditUser = async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const user = await userModel.findById(userId); 
+
+    if (!user) {
+      return res.status(404).send('User not found');
+    }
+
+    res.render('dashboard/users/editUser', { user });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send('Server error');
+  }
+}
+
+
+exports.updateUserByAdmin=async (req,res) => {
+  try {
+    const userId = req.params.id;
+    const {username,email,role}=req.body
+  
+     if (!username || !email || !role) {
+      return res.status(400).send('All fields are required.');
+    }
+    
+  
+    await userModel.updateUserByAdmin(userId,username,email,role);
+
+  
+
+    res.redirect('/dashboard')
+    
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+exports.DeleteUserByAdmin=async (req,res) => {
+  try {
+     const userId = req.params.id;
+     await userModel.RemoveUserByAdmin(userId)
+
+     res.redirect('/dashboard')
+
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+
+exports.showEditProject=async (req,res) => {
+  try {
+    const projectId=req.params.id;
+    const project=await projectModel.getProjectById(projectId);
+    
+    
+   //always send object not array
+    res.render('dashboard/projects/editProject',{
+      project
+    })
+    
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+exports.updateProjectByAdmin=async (req,res) => {
+  try {
+    const projectId=req.params.id;
+    const{name,description}=req.body
+
+    await projectModel.updateProjectByAdmin(projectId,name,description)
+
+    res.redirect('/dashboard')
+
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+exports.DeleteProjectByAdmin=async (req,res) => {
+  
+  try {
+    const projId=req.params.id;
+    await projectModel.RemoveProjectById(projId);
+
+    res.redirect('/dashboard')
+    
+  } catch (error) {
+    console.log(error);
+  }
+}

@@ -3,7 +3,7 @@ const session = require('express-session');
 const userModel = require('./models/userModel');
 const pgSession = require('connect-pg-simple')(session);
 const db = require('./db/index'); // or adjust path as needed
-
+const methodOverride=require('method-override')
 
 
 const app = express();
@@ -24,6 +24,7 @@ app.use(session({
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.set('view engine', 'ejs');
+app.use(methodOverride('_method'));
 
 const authRoutes = require('./routes/auth');
 const profileRoutes = require('./routes/profile');

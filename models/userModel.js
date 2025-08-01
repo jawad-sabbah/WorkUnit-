@@ -19,7 +19,7 @@ exports.findById=async (id) => {
 }
 
 exports.getAllUsers=async () => {
-  const result=await db.query("select * from users order by id ASC")
+  const result=await db.query("select * from users where id <> 1 order by id ASC")
   return result.rows
 }
 
@@ -33,4 +33,12 @@ exports.updateProfile=async (id,username,email) => {
   );
    
    return result.rows[0];
+}
+
+exports.updateUserByAdmin=async (id,username,email,role) => {
+  const result=await db.query('UPDATE users SET username = $1, email = $2,role=$3 WHERE id = $4 RETURNING *',[username,email,role,id])
+}
+
+exports.RemoveUserByAdmin=async (id) => {
+  const result=await db.query('delete from users where id=$1',[id])
 }
