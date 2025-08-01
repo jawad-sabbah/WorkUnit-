@@ -4,13 +4,37 @@ const projectModel=require('../models/projectModel');
 
 exports.showDashboard=async (req,res) => {
   try {
+      
+       let users;
+       let project;   
+       
+       //search for specific username,project
+       const search= req.query.search || '';
+       const projectSearch=req.query.projectSearch || '';
 
-       const users=await userModel.getAllUsers();
-       const project=await projectModel.getAllProject();         
+
+       //if there is search Operation so only search result appear
+       if (search) {
+       users= await userModel.searchByUsername(search)
+       }
+       else{
+        users=await userModel.getAllUsers();
+       }
+       
+
+      if (projectSearch) {
+        project=await projectModel.searchByProjectName(projectSearch);
+      }
+      else{
+         project=await projectModel.getAllProject();  
+      }
+
 
      res.render('dashboard/dashboard',{
       users:users,
-      projects:project
+      projects:project,
+      search,
+      projectSearch
      })
 
   } catch (error) {
@@ -111,3 +135,4 @@ exports.DeleteProjectByAdmin=async (req,res) => {
     console.log(error);
   }
 }
+

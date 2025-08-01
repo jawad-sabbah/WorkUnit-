@@ -31,3 +31,26 @@ exports.updateProjectByAdmin=async (id,title,desc) => {
 exports.RemoveProjectById=async (id) => {
    const result=await db.query('delete from projects where id=$1',[id]);
 }
+exports.searchByProjectName=async (projName) => {
+  const result=await db.query('select * from projects where name like $1',[`%${projName}%`])
+  return result.rows;
+}
+
+
+exports.CreateProject=async (title,description,currentUserId,date) => {
+  const result=await db.query('insert into projects(name,description,owner_id,created_at) values($1,$2,$3,$4) returning *',[title,description,currentUserId,date]);
+
+  return result.rows;
+}
+
+exports.getProjectForloggedinUser=async (id) => {
+   const result = await db.query(`
+    SELECT 
+      projects.*, 
+      users.username AS owner_username
+    FROM projects
+     JOIN users ON projects.owner_id = users.id
+     WHERE projects.owner_id = $1
+  `,[id]);
+  return result.rows
+}

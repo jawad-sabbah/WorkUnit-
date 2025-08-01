@@ -30,12 +30,14 @@ const authRoutes = require('./routes/auth');
 const profileRoutes = require('./routes/profile');
 const layoutRoutes = require('./routes/layout');
 const dashboardRoutes=require('./routes/dashboard')
+const projectRoutes=require('./routes/project')
 
 // Routes
 app.use('/auth', authRoutes);
 app.use('/profile', profileRoutes);
 app.use('/layout', layoutRoutes);  // mounted layout router
 app.use('/dashboard',dashboardRoutes);
+app.use('/projects',projectRoutes);
 
 
 // Root route

@@ -1,0 +1,70 @@
+<%- include('../partials/header') %>
+
+
+
+<div class="max-w-4xl mx-auto px-4 py-16">
+  <a href="/layout" class="inline-flex items-center text-blue-600 hover:text-blue-800 mb-6">
+  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+  </svg>
+  Back Home
+</a>
+
+
+  <!-- Empty State Container -->
+  <div class="text-center">
+    <p class="text-gray-500 text-base">Start by creating your first project to organize your work and tasks efficiently.</p>
+
+    <!-- CTA Button -->
+    <a href="/projects/new" class="mt-6 inline-block bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg font-medium transition">
+      Create New Project
+    </a>
+  </div>
+
+  <!-- Optional: Search (future-proof layout) -->
+  <div class="mt-12 max-w-md mx-auto">
+    <form action="/projects/search" method="GET" class="relative">
+      <input
+        type="text"
+        name="q"
+        placeholder="Search projects..."
+        class="w-full pl-4 pr-10 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+      />
+      <button type="submit" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z" />
+        </svg>
+      </button>
+    </form>
+  </div>
+
+<!-- Clear & Recognizable Tips -->
+<div class="mt-16 grid gap-6 md:grid-cols-2">
+  <!-- Tip 1 -->
+  <div class="border border-gray-200 rounded-lg p-5 bg-white shadow-sm">
+    <h3 class="text-lg font-semibold text-gray-800 mb-2">📁 Create Projects to Organize Work</h3>
+    <p class="text-sm text-gray-600">Each project keeps your tasks, notes, and deadlines in one place — no more scattered ideas.</p>
+  </div>
+
+  <!-- Tip 2 -->
+  <div class="border border-gray-200 rounded-lg p-5 bg-white shadow-sm">
+    <h3 class="text-lg font-semibold text-gray-800 mb-2">👥 Invite Your Team</h3>
+    <p class="text-sm text-gray-600">Work together by adding collaborators to your projects. Everyone stays aligned and updated.</p>
+  </div>
+
+  <!-- Tip 3 -->
+  <div class="border border-gray-200 rounded-lg p-5 bg-white shadow-sm">
+    <h3 class="text-lg font-semibold text-gray-800 mb-2">✅ Track Progress Easily</h3>
+    <p class="text-sm text-gray-600">Mark tasks as complete, set due dates, and monitor what’s done and what’s left — all in real time.</p>
+  </div>
+
+  <!-- Tip 4 -->
+  <div class="border border-gray-200 rounded-lg p-5 bg-white shadow-sm">
+    <h3 class="text-lg font-semibold text-gray-800 mb-2">🔒 Stay in Control</h3>
+    <p class="text-sm text-gray-600">Your projects are private by default. Share only when you’re ready.</p>
+  </div>
+</div>
+
+
+<%- include('../partials/footer') %>
+  

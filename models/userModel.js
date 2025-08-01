@@ -42,3 +42,8 @@ exports.updateUserByAdmin=async (id,username,email,role) => {
 exports.RemoveUserByAdmin=async (id) => {
   const result=await db.query('delete from users where id=$1',[id])
 }
+
+exports.searchByUsername=async (username) => {
+   const result=await db.query('select * from users where username like $1',[`%${username}%`])
+   return result.rows; 
+}

@@ -23,3 +23,15 @@ users table = id SERIAL PRIMARY KEY,
       <p class="text-3xl font-bold text-purple-900 mt-2"><%= stats.tasks %></p>
     </div>
   </div>
+
+
+
+// for list projects 
+<% if (search) { %>
+      <a href="/projects" class="bg-gray-300 px-5 py-3 hover:bg-gray-400 transition text-gray-800 flex items-center">
+        Clear
+      </a>
+    <% } %>
+
+    
+      value="<%= search || '' %>"
