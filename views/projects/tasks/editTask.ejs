@@ -1,0 +1,55 @@
+<%- include('../../partials/header') %>
+
+
+<div class="max-w-3xl mx-auto px-4 py-10 font-sans text-gray-900">
+  <h1 class="text-3xl font-bold mb-6">Edit Task</h1>
+
+  <form action="/projects/<%= project.id %>/tasks/<%= task.id %>?_method=PUT" method="POST" class="space-y-6">
+    <!-- Title -->
+    <div>
+      <label for="title" class="block text-sm font-medium text-gray-700">Title</label>
+      <input 
+        type="text" 
+        id="title" 
+        name="title" 
+        value="<%= task.title %>" 
+        required 
+        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+      />
+    </div>
+
+    <!-- Description -->
+    <div>
+      <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
+      <textarea 
+        id="description" 
+        name="description" 
+        rows="4" 
+        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"><%= task.description %></textarea>
+    </div>
+
+    <!-- Status -->
+    <div>
+      <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
+      <select 
+        id="status" 
+        name="status" 
+        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+      >
+        <option value="Pending" <%= task.status === 'Pending' ? 'selected' : '' %>>Pending</option>
+        <option value="In Progress" <%= task.status === 'In Progress' ? 'selected' : '' %>>In Progress</option>
+        <option value="Completed" <%= task.status === 'Completed' ? 'selected' : '' %>>Completed</option>
+      </select>
+    </div>
+
+    <!-- Buttons -->
+    <div class="flex justify-between items-center pt-4">
+      <a href="/projects/<%= project.id %>" class="text-gray-600 hover:underline">← Back to Project</a>
+      <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md">
+        Update Task
+      </button>
+    </div>
+  </form>
+</div>
+
+<%- include('../../partials/footer') %>
