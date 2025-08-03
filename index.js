@@ -4,6 +4,9 @@ const userModel = require('./models/userModel');
 const pgSession = require('connect-pg-simple')(session);
 const db = require('./db/index'); 
 const methodOverride=require('method-override')
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 
 const app = express();
@@ -14,7 +17,7 @@ app.use(session({
     tableName: 'session',
      createTableIfMissing: true
   }),
-  secret: 'your-secret-key',
+  secret: process.env.SESSION_SECRE,
   resave: false,
   saveUninitialized: false,
   cookie: { maxAge: 24 * 60 * 60 * 1000 } // 1 day
