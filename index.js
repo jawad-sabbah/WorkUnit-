@@ -2,7 +2,7 @@ const express = require('express');
 const session = require('express-session');
 const userModel = require('./models/userModel');
 const pgSession = require('connect-pg-simple')(session);
-const db = require('./db/index'); // or adjust path as needed
+const db = require('./db/index'); 
 const methodOverride=require('method-override')
 
 
@@ -35,7 +35,7 @@ const projectRoutes=require('./routes/project')
 // Routes
 app.use('/auth', authRoutes);
 app.use('/profile', profileRoutes);
-app.use('/layout', layoutRoutes);  // mounted layout router
+app.use('/layout', layoutRoutes);  
 app.use('/dashboard',dashboardRoutes);
 app.use('/projects',projectRoutes);
 

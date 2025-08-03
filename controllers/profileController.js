@@ -7,7 +7,7 @@ exports.showProfile = async (req, res) => {
     const userId = req.session.user.id;
     
      
-    const user = await userModel.findById(userId); // fetch user data from DB
+    const user = await userModel.findById(userId); 
     const numOfProject =await projectModel.getNumberOfProject(userId)
     const numOfTask=await taskModel.getNumberOfTasks(userId); 
     

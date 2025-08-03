@@ -46,7 +46,7 @@
       <% tasks.forEach(task => { %>
         <div class="bg-white border border-gray-200 rounded-md shadow-sm p-4 flex items-start justify-between">
           <div class="flex items-start space-x-3 w-full">
-            <!-- Checkbox -->
+            
             <form method="POST" action="/projects/<%= project.id %>/tasks/<%= task.id %>/toggle" class="mt-1">
               <input 
                 type="checkbox" 
