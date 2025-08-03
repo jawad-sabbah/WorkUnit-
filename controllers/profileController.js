@@ -1,6 +1,6 @@
 const projectModel=require('../models/projectModel')
 const userModel=require('../models/userModel')
-
+const taskModel=require('../models/taskModel')
 
 exports.showProfile = async (req, res) => {
   try {
@@ -9,9 +9,9 @@ exports.showProfile = async (req, res) => {
      
     const user = await userModel.findById(userId); // fetch user data from DB
     const numOfProject =await projectModel.getNumberOfProject(userId)
-   
+    const numOfTask=await taskModel.getNumberOfTasks(userId); 
     
-    res.render('profile', { user,numOfProject:numOfProject.count  });
+    res.render('profile', { user,numOfProject:numOfProject.count,numOfTask:numOfTask.count  });
   } catch (err) {
     console.error('Profile error:', err);
     res.status(500).send('Internal Server Error');

@@ -111,3 +111,34 @@ exports.ShowEditTask=async (req,res) => {
     console.log(error);
   }
 }
+exports.UpdateTask=async (req,res) => {
+  
+  try {
+      const taskId=req.params.taskId
+      const currentProjectId=req.params.projectId
+      const{title,description}=req.body
+      await taskModel.updateTask(title,description,taskId)
+
+       res.redirect(`/projects/${currentProjectId}`)
+    
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+exports.checkTask = async (req, res) => {
+  try {
+    const taskId = req.params.taskId;
+    const currentProjectId = req.params.projectId;
+    const isCompleted = req.body.completed !== undefined;
+
+    const newStatus = isCompleted ? 'Completed' : 'In Progress';
+
+    await taskModel.updateStatus(newStatus, taskId);
+
+    res.redirect(`/projects/${currentProjectId}`);
+  } catch (error) {
+    console.log('Error updating task status:', error);
+    res.status(500).send('Failed to update task.');
+  }
+};

@@ -17,4 +17,10 @@ router.post('/:id/tasks',requireAuth,projectController.CreateTask)
 
 router.get('/:projectId/tasks/:taskId/edit', requireAuth, projectController.ShowEditTask);
 
+router.put('/:projectId/tasks/:taskId', requireAuth, projectController.UpdateTask);
+
+router.post('/:projectId/tasks/:taskId/toggle',requireAuth,projectController.checkTask)
+
+
+
 module.exports = router;
